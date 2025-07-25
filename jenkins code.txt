@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                echo "Cleaning up workspace..."
+                deleteDir() // This deletes all files in the Jenkins workspace
+            }
+        }
+
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/your-repo/sample-project.git'
+            }
+        }
+
+        stage('Delete Specific File') {
+            steps {
+                echo "Deleting README.md..."
+                sh 'rm -f README.md'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "This is your build stage (safe to modify)"
+            }
+        }
+    }
+}
